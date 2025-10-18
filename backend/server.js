@@ -24,6 +24,25 @@ let todos = [...initialTodos];
 
 // API Endpoints
 
+// Register
+app.post('/api/register', (req, res) => {
+    const { username, password } = req.body;
+    if (!username || !password) {
+        return res.status(400).json({ message: 'Username and password are required' });
+    }
+    const userExists = users.find(u => u.username === username);
+    if (userExists) {
+        return res.status(409).json({ message: 'Username already exists' });
+    }
+    const newUser = {
+        id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+        username,
+        password
+    };
+    users.push(newUser);
+    res.status(201).json({ id: newUser.id, username: newUser.username });
+});
+
 // Login
 app.post('/api/login', (req, res) => {
     const { username, password } = req.body;

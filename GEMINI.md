@@ -54,7 +54,7 @@ The frontend application will be running on `http://localhost:3001`.
 
 The project uses Playwright for end-to-end testing. The tests are located in the `frontend/tests` directory.
 
-To run the tests, follow these steps:
+To run the tests, follow these steps. By default, they run in headless mode (no visible browser).
 
 1.  Make sure both the backend and frontend servers are running.
 2.  Navigate to the `frontend` directory:
@@ -70,6 +70,52 @@ To run the tests in headed mode (with a visible browser), use this command:
 ```bash
 npx playwright test --headed
 ```
+
+## Playwright MCP Server Setup
+
+This section describes how to set up the Playwright MCP server to allow Gemini to interact with the browser.
+
+1.  **Install the server:**
+    ```bash
+    npm install -g @executeautomation/playwright-mcp-server
+    npx playwright install
+    ```
+
+2.  **Configure Gemini CLI:**
+    You need to tell the Gemini CLI where to find and how to run the Playwright MCP server. This is done by editing the Gemini CLI's user-specific configuration file (`settings.json`).
+
+    *   **Locate the `settings.json` file:**
+        *   **macOS / Linux:** `~/.gemini/settings.json`
+        *   **Windows:** `%USERPROFILE%\.gemini\settings.json`
+
+    *   **Update `settings.json`:**
+        If the file doesn't exist, create it. Add or modify the `mcpServers` section to include the Playwright MCP server configuration:
+        ```json
+        {
+            "ide": {
+                "hasSeenNudge": true,
+                "enabled": true
+            },
+            "security": {
+                "auth": {
+                "selectedType": "oauth-personal"
+                }
+            },
+            "mcpServers": {
+                "playwright": {
+                "command": "npx",
+                "args": [
+                    " @playwright/mcp@latest"
+                ]
+                }
+            }
+        }
+        ```
+
+3.  **Start Gemini:**
+    Open a new terminal and type `gemini` to start the Gemini CLI. It should now be able to locate and run the Playwright MCP server. You can verify this by checking for "1 MCP Server" above the chatbox in the Gemini CLI and by running the `/mcp` command.
+
+
 
 ## Development Conventions
 
