@@ -75,21 +75,24 @@ npx playwright test --headed
 
 This section describes how to set up the Playwright MCP server to allow Gemini to interact with the browser.
 
-1.  **Install the server:**
+1.  **Install the server dependencies:**
+    The core Playwright tool is used to manage the browsers.
+
     ```bash
-    npm install -g @executeautomation/playwright-mcp-server
+    # Install the Playwright browsers (Chromium, Firefox, WebKit)
     npx playwright install
     ```
 
 2.  **Configure Gemini CLI:**
     You need to tell the Gemini CLI where to find and how to run the Playwright MCP server. This is done by editing the Gemini CLI's user-specific configuration file (`settings.json`).
 
-    *   **Locate the `settings.json` file:**
-        *   **macOS / Linux:** `~/.gemini/settings.json`
-        *   **Windows:** `%USERPROFILE%\.gemini\settings.json`
+    * **Locate the `settings.json` file:**
+        * **macOS / Linux:** `~/.gemini/settings.json`
+        * **Windows:** `%USERPROFILE%\.gemini\settings.json`
 
-    *   **Update `settings.json`:**
-        If the file doesn't exist, create it. Add or modify the `mcpServers` section to include the Playwright MCP server configuration:
+    * **Update `settings.json`:**
+        Add or modify the `mcpServers` section to include the Playwright MCP server configuration. This uses the widely supported **`@playwright/mcp@latest`** package and runs in **headed (visible) mode** for easier debugging.
+
         ```json
         {
             "ide": {
@@ -105,7 +108,8 @@ This section describes how to set up the Playwright MCP server to allow Gemini t
                 "playwright": {
                 "command": "npx",
                 "args": [
-                    " @playwright/mcp@latest"
+                    "@playwright/mcp@latest"
+                    // To run headless (hidden browser), add the argument: "--headless"
                 ]
                 }
             }
