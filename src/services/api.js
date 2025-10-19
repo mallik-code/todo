@@ -25,3 +25,7 @@ export const updateTodo = (id, todo) => {
 export const deleteTodo = (id) => {
     return axios.delete(`${API_URL}/todos/${id}`);
 };
+
+export const getActivityLog = (userId) => {
+    return axios.get(`${API_URL}/activity-log/${userId}`);
+};

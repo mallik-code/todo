@@ -64,6 +64,9 @@ const TodoList = () => {
                              <li className="nav-item ms-2">
                                 <button className="btn btn-outline-primary" onClick={() => navigate('/report')} data-testid="report-button">Report</button>
                             </li>
+                             <li className="nav-item ms-2">
+                                <button className="btn btn-outline-info" onClick={() => navigate('/activity')} data-testid="activity-button">Activity</button>
+                            </li>
                         </ul>
                     </div>
                 </div>
