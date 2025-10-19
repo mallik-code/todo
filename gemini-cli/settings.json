@@ -1,0 +1,25 @@
+{
+  "ide": {
+    "hasSeenNudge": true,
+    "enabled": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--headed"
+      ]
+    },
+    "postgres-mcp": {
+      "url": "http://localhost:8000/sse",  // Update to the working endpoint
+      "transport": "sse",
+      "trustLevel": "full"
+    }
+  }
+}
