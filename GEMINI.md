@@ -151,6 +151,6 @@ This structure is intended to promote a clean separation of concerns and a scala
 *   **Testing:**
     *   Playwright is used for end-to-end testing.
     *   Tests are located in the `frontend/tests` directory.
-    *   `data-testid` attributes are used to select elements in the tests for better stability.
+    *   `data-testid` attributes are used to select elements in the tests for better stability. For input elements, the convention is to use the format `<name>-input`, for example `username-input`.
     *   The backend provides a `/api/reset` endpoint to reset the database state before each test run.
     *   Tests that modify the backend state are configured to run sequentially to avoid interference.
