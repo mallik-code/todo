@@ -7,10 +7,10 @@ This file provides a comprehensive overview of the project, its structure, and h
 This is a full-stack todo application with a React frontend and a Node.js/Express backend.
 
 *   **Frontend:** A single-page application built with React. It allows users to log in, manage their todo list, and view a report of their todos.
-*   **Backend:** A Node.js/Express server that provides a REST API for the frontend. It handles user authentication and todo management. The data is stored in-memory.
+*   **Backend:** A Node.js/Express server that provides a REST API for the frontend. It handles user authentication and todo management. The data is stored in a PostgreSQL database. It also features an activity log to track user actions.
 *   **Testing:** The project uses Playwright for end-to-end UI automation testing.
 
-The project is structured as a monorepo with two main directories: `frontend` and `backend`.
+The project is structured as a monorepo. See the "Directory Structure" section for more details.
 
 ## Building and Running
 
@@ -18,15 +18,25 @@ The project is structured as a monorepo with two main directories: `frontend` an
 
 To run the backend server, follow these steps:
 
-1.  Navigate to the `backend` directory:
+1.  **Start the database:** The backend requires a PostgreSQL database. A Docker Compose configuration is provided in the `iac` directory. To start the database, run the following command from the project root:
+    ```bash
+    docker-compose -f iac/docker-compose.yaml up -d
+    ```
+2.  **Set up environment variables:** Create a `.env` file in the project root with the following content:
+    ```
+    POSTGRES_USER=user
+    POSTGRES_PASSWORD=password
+    POSTGRES_DB=testdb
+    ```
+3.  Navigate to the `backend` directory:
     ```bash
     cd backend
     ```
-2.  Install the dependencies:
+4.  Install the dependencies:
     ```bash
     npm install
     ```
-3.  Start the server:
+5.  Start the server:
     ```bash
     node server.js
     ```
@@ -121,10 +131,23 @@ This section describes how to set up the Playwright MCP server to allow Gemini t
 
 
 
+## Directory Structure
+
+The project is structured as a monorepo with the following top-level directories:
+
+*   `frontend/`: Contains the React frontend application.
+*   `backend/`: Contains the Node.js/Express backend server.
+*   `iac/`: Contains Infrastructure as Code (IaC) files, such as Docker Compose configurations.
+
+*   `.env`: A file at the root of the project to store environment variables for the database connection.
+
+This structure is intended to promote a clean separation of concerns and a scalable architecture. Future development should adhere to these principles, organizing code by feature or domain and maintaining a clear distinction between different parts of the application.
+
 ## Development Conventions
 
 *   **Styling:** The project uses Bootstrap for styling. The Bootstrap CSS is imported in `frontend/src/index.js`.
 *   **API Communication:** The frontend communicates with the backend via a REST API. The API service is defined in `frontend/src/services/api.js`.
+*   **Activity Log:** User actions are logged to the `activity_log` table in the database. The frontend provides an "Activity" page to view these logs.
 *   **Testing:**
     *   Playwright is used for end-to-end testing.
     *   Tests are located in the `frontend/tests` directory.
