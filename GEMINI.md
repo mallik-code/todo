@@ -129,6 +129,40 @@ This section describes how to set up the Playwright MCP server to allow Gemini t
 3.  **Start Gemini:**
     Open a new terminal and type `gemini` to start the Gemini CLI. It should now be able to locate and run the Playwright MCP server. You can verify this by checking for "1 MCP Server" above the chatbox in the Gemini CLI and by running the `/mcp` command.
 
+## Testing with Gemini and Playwright
+
+You can use Gemini to write and execute Playwright tests for you. To do this, you need to structure your prompt in a specific way.
+
+### Prompt Structure
+
+Your prompt should start by referencing the Playwright configuration file, followed by a clear and detailed description of the test case.
+
+```
+@frontend\playwright.config.js "Your detailed test instructions here"
+```
+
+### Instructions for Writing Test Prompts
+
+When writing the test instructions, be as specific as possible. Describe the actions to be performed in a sequential manner. Use user-facing attributes like labels, roles, or text to identify elements, as this makes the tests more robust. If specific `data-testid` attributes are available, you can instruct Gemini to use them.
+
+### Example Prompt
+
+Here is an example of a detailed prompt to test the login functionality:
+
+```
+@frontend\playwright.config.js "Open the browser (use headed mode), navigate to the frontend URL (http://localhost:3001). Wait for the 'Login' page to be fully interactive. Then, perform the following actions sequentially using user-facing attributes (like labels or roles) for locators: 1. Fill the field with data-testid 'username-input' with 'user1'. 2. Fill the field with data-testid 'password-input' with 'password1'. 3. Click the 'Login' button. End by taking a screenshot named 'post-login-attempt.png'."
+```
+
+This prompt will instruct Gemini to:
+1.  Create a new Playwright test file.
+2.  The test will run in a visible browser window (`headed mode`).
+3.  Navigate to the application.
+4.  Fill in the login form.
+5.  Click the login button.
+6.  Take a screenshot to verify the result.
+
+By following this structure, you can leverage Gemini to automate the creation and execution of your Playwright tests.
+
 
 
 ## Directory Structure
