@@ -98,6 +98,15 @@ test('should display the correct report', async ({ page }) => {
   await completedTodoItem.getByTestId(/done-button-.*/).click();
   await page.waitForTimeout(1000);
 
+  // Add a second completed todo
+  await page.getByTestId('new-task-input').fill('Second completed todo for report');
+  await page.waitForTimeout(1000);
+  await page.getByTestId('add-todo-button').click();
+  await page.waitForTimeout(1000);
+  const secondCompletedTodoItem = page.locator('[data-testid^="todo-item-"]').filter({ hasText: 'Second completed todo for report' });
+  await secondCompletedTodoItem.getByTestId(/done-button-.*/).click();
+  await page.waitForTimeout(1000);
+
 
   // Add an in-progress todo
   await page.getByTestId('new-task-input').fill('In progress todo for report');
@@ -106,6 +115,15 @@ test('should display the correct report', async ({ page }) => {
   await page.waitForTimeout(1000);
   const inProgressTodoItem = page.locator('[data-testid^="todo-item-"]').filter({ hasText: 'In progress todo for report' });
   await inProgressTodoItem.getByTestId(/start-button-.*/).click();
+  await page.waitForTimeout(1000);
+
+  // Add a second in-progress todo
+  await page.getByTestId('new-task-input').fill('Second in progress todo for report');
+  await page.waitForTimeout(1000);
+  await page.getByTestId('add-todo-button').click();
+  await page.waitForTimeout(1000);
+  const secondInProgressTodoItem = page.locator('[data-testid^="todo-item-"]').filter({ hasText: 'Second in progress todo for report' });
+  await secondInProgressTodoItem.getByTestId(/start-button-.*/).click();
   await page.waitForTimeout(1000);
 
 
