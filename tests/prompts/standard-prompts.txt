@@ -1,0 +1,64 @@
+# Prompts for testing the Todo Application
+
+# --- Login ---
+
+1.  **Successful Login and Logout**
+    *   Navigate to the login page.
+    *   Enter username 'user1' and password 'password1'.
+    *   Click the 'Login' button.
+    *   Assert that the user is redirected to the '/todos' page.
+    *   Click the 'Logout' button.
+    *   Assert that the user is redirected to the login page.
+
+2.  **Failed Login**
+    *   Navigate to the login page.
+    *   Enter username 'user1' and password 'wrongpassword'.
+    *   Click the 'Login' button.
+    *   Assert that an error message is displayed.
+
+# --- Todo Management ---
+
+3.  **Add a New Todo**
+    *   Log in as 'user1'.
+    *   Navigate to the '/todos' page.
+    *   Enter "Buy milk" in the new task input.
+    *   Click the 'Add' button.
+    *   Assert that "Buy milk" appears in the todo list.
+
+4.  **Mark a Todo as In Progress**
+    *   Log in as 'user1'.
+    *   Add a new todo "Walk the dog".
+    *   Find the "Walk the dog" todo item.
+    *   Click the 'Start' button for that item.
+    *   Assert that the status of the "Walk the dog" todo is "In Progress".
+
+5.  **Mark a Todo as Completed**
+    *   Log in as 'user1'.
+    *   Add a new todo "Read a book".
+    *   Click the 'Start' button for "Read a book".
+    *   Click the 'Done' button for "Read a book".
+    *   Assert that the status of the "Read a book" todo is "Completed".
+
+6.  **Delete a Todo**
+    *   Log in as 'user1'.
+    *   Add a new todo "Clean the house".
+    *   Find the "Clean the house" todo item.
+    *   Click the 'Delete' button for that item.
+    *   Assert that "Clean the house" is no longer in the todo list.
+
+7.  **Attempt to Add an Empty Todo**
+    *   Log in as 'user1'.
+    *   Navigate to the '/todos' page.
+    *   Leave the new task input empty.
+    *   Click the 'Add' button.
+    *   Assert that no new todo is added to the list.
+
+# --- Reporting ---
+
+8.  **Verify Report Page**
+    *   Log in as 'user1'.
+    *   Add a todo and mark it as completed.
+    *   Add another todo and mark it as in progress.
+    *   Navigate to the '/report' page.
+    *   Assert that the completed todos count is 1.
+    *   Assert that the in-progress todos count is 1.

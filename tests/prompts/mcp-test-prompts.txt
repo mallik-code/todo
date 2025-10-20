@@ -1,0 +1,7 @@
+1. Open http://localhost:3001 url in browser, then test log in using the default credentials (username: user1, password: password1), then logs out, and finally asserts that the user is returned to the login page.
+
+2. Add "Buy Mangoes" in todo then click on Add button
+3. Click on Start button of Buy Mangoes entry
+4. For each step take a screenshot
+5. Click Logout button
+
