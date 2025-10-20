@@ -187,7 +187,7 @@ app.delete('/api/todos/:id', async (req, res) => {
 // Reset todos
 app.post('/api/reset', async (req, res) => {
     try {
-        await pool.query('TRUNCATE TABLE todos, users, activity_log RESTART IDENTITY');
+        await pool.query('TRUNCATE TABLE users RESTART IDENTITY CASCADE');
         await pool.query("INSERT INTO users (username, password) VALUES ('user1', 'password1')");
         res.status(204).send();
     } catch (error) {
